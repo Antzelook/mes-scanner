@@ -1,28 +1,34 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="bg-blue-950 w-full p-4">
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-2 md:space-y-0">
-        {/* Title */}
-        <Link href="/">
-          <h1 className="text-3xl font-bold text-blue-400">Mes-Digital-web</h1>
-        </Link>
-
-        {/* Search Bar */}
-        <div className="flex items-center w-full md:w-1/3 bg-white rounded-xl">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="flex-1 p-2 focus:outline-none"
+    <>
+      <header className="w-full p-4 border-b shadow-lg">
+        <div className="flex flex-col md:flex-row md:justify-start items-center gap-4">
+          <Image
+            src="/images/mes-logo.png"
+            alt="Mes digital logo"
+            width={100}
+            height={100}
           />
-          <button className="p-2 bg-white hover:bg-gray-200">
-            <FaSearch className="h-5 w-5 text-gray-600" />
-          </button>
+          <Link href="/">
+            <h1 className="text-3xl font-bold text-blue-400">Mes-Digital</h1>
+          </Link>
+          <div className="flex items-center w-full md:w-1/3 border shadow-lg rounded-xl md:ml-auto">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="flex-1 p-2 focus:outline-none"
+            />
+            <button className="p-2 bg-white rounded-xl hover:bg-blue-400">
+              <FaSearch className="h-5 w-5 text-black" />
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 
