@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import LatLongForm from "./latlong-form";
-
+import QRScannerForm from "./qrscanner-form";
 
 const InsertError = () => {
   const [types, setTypes] = useState<string[]>([]);
@@ -58,7 +58,7 @@ const InsertError = () => {
         <LatLongForm />
 
         {/* SERIAL + QR SCANNER + DEVEUI */}
-        
+        <QRScannerForm />
 
         {/* TYPE OPTIONS */}
         <div>

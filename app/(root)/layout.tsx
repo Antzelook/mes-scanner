@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
-import Header from "../../components/header";
+import Header from "@/components/header";
 import { store } from "../redux/store";
 
 export default function RootLayout({
