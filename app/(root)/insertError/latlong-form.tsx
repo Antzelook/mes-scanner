@@ -1,6 +1,6 @@
 "use client";
 
-import Spinner from "@/app/components/spinner";
+import Spinner from "@/components/spinner";
 import { useState, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import toast from "react-hot-toast";
