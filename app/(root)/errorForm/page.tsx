@@ -1,13 +1,53 @@
 "use client";
 
-import { useState } from "react";
-import LatLongForm from "./latlong-form";
-import QRScannerForm from "./qrscanner-form";
+import { useState, useEffect } from "react";
+import { useGeolocated } from "react-geolocated";
+import toast from "react-hot-toast";
+import Spinner from "@/components/spinner";
+import QRScanner from "@/components/qrscanner";
+import { FiMapPin } from "react-icons/fi";
 
-const InsertError = () => {
+const ErrorForm = () => {
+  const [lat, setLat] = useState("");
+  const [long, setLong] = useState("");
+  const [locationRequested, setLocationRequested] = useState(false);
+  const [serial, setSerial] = useState("");
+  const [deveui, setDeveui] = useState("");
   const [types, setTypes] = useState<string[]>([]);
   const [otherComment, setOtherComment] = useState("");
   const [actions, setActions] = useState<string[]>([]);
+
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+    });
+
+  const handleLocationClick = () => {
+    if (!coords) toast.error("Η τοποθεσία δεν είναι ακόμα έτοιμη...");
+    setLocationRequested(true);
+  };
+
+  useEffect(() => {
+    if (isGeolocationAvailable === false) {
+      toast.error("Το browser δεν υποστηρίζει τοποθεσία.");
+    }
+    if (isGeolocationEnabled === false) {
+      toast.error("Η τοποθεσία είναι απενεργοποιημένη στη συσκευή.");
+    }
+  }, [isGeolocationAvailable, isGeolocationEnabled]);
+
+  useEffect(() => {
+    if (locationRequested && coords) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLat(coords.latitude.toString());
+      setLong(coords.longitude.toString());
+      toast.success("Η τοποθεσία ενημερώθηκε!");
+      setLocationRequested(false);
+    }
+  }, [coords, locationRequested]);
 
   const typeOptions = ["Βλάβη 1", "Βλάβη 2", "Βλάβη 3", "Βλάβη 4"];
   const actionOptions = [
@@ -35,12 +75,20 @@ const InsertError = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     const newRecord = {
+      date: currentDate,
+      latitude: lat,
+      longitude: long,
+      serial,
+      deveui,
       types,
-      otherComment,
       actions,
+      otherComment,
     };
+
     console.log("Submitting:", newRecord);
+    toast.success("Η βλάβη καταχωρήθηκε!");
   };
 
   return (
@@ -59,12 +107,78 @@ const InsertError = () => {
         </div>
 
         {/* LAT / LONG */}
-        <LatLongForm />
+        <div className="flex gap-4 items-end mt-4">
+          <div className="flex flex-col flex-1 gap-3">
+            <div>
+              <label className="font-semibold">Latitude:</label>
+              <input
+                type="text"
+                value={lat}
+                readOnly
+                placeholder="Πατήστε το κουμπί τοποθεσίας →"
+                className="border rounded-xl p-2 w-full"
+              />
+            </div>
 
-        {/* SERIAL + QR SCANNER + DEVEUI */}
-        <QRScannerForm />
+            <div>
+              <label className="font-semibold">Longitude:</label>
+              <input
+                type="text"
+                value={long}
+                readOnly
+                placeholder="Πατήστε το κουμπί τοποθεσίας →"
+                className="border rounded-xl p-2 w-full"
+              />
+            </div>
+          </div>
 
-        {/* TYPE OPTIONS */}
+          {/* LOCATION BUTTON */}
+          <button
+            onClick={handleLocationClick}
+            type="button"
+            className="w-30 h-30 flex items-center justify-center"
+          >
+            {!coords ? <Spinner /> : <FiMapPin size={40} />}
+          </button>
+        </div>
+
+        {/* QR SCANNER */}
+        <div className="flex gap-6 items-start">
+          <div className="flex-1 space-y-4">
+            <div>
+              <label className="font-semibold">Serial Number:</label>
+              <input
+                type="text"
+                placeholder="Πατήστε για σάρωση →"
+                value={serial}
+                onChange={(e) => setSerial(e.target.value)}
+                className="border rounded-xl p-1 w-full"
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold">Deveui:</label>
+              <input
+                type="text"
+                placeholder="Πατήστε για σάρωση →"
+                value={deveui}
+                onChange={(e) => setDeveui(e.target.value)}
+                className="border rounded-xl p-1 w-full"
+              />
+            </div>
+          </div>
+
+          <div className="w-30 h-30">
+            <QRScanner
+              onScan={(serial: string, deveui: string) => {
+                setSerial(serial);
+                setDeveui(deveui);
+              }}
+            />
+          </div>
+        </div>
+
+        {/* TYPES */}
         <div>
           <label className="font-semibold">Είδος Βλάβης:</label>
           <div className="flex flex-col mt-1">
@@ -81,7 +195,7 @@ const InsertError = () => {
           </div>
         </div>
 
-        {/* OTHER COMMENT */}
+        {/* COMMENT */}
         <div>
           <label className="font-semibold">Άλλο σχόλιο:</label>
           <textarea
@@ -120,4 +234,4 @@ const InsertError = () => {
   );
 };
 
-export default InsertError;
+export default ErrorForm;
