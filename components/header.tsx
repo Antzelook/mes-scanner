@@ -14,7 +14,7 @@ const Header = () => {
             height={100}
           />
           <Link href="/">
-            <h1 className="text-3xl font-bold text-sky-500">Mes-Digital</h1>
+            <h1 className="text-2xl font-bold">Mesogeos Digital</h1>
           </Link>
           <div className="flex items-center w-full md:w-1/3 border shadow-lg rounded-xl md:ml-auto">
             <input
