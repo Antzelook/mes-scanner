@@ -6,10 +6,23 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+ // output   = "../lib/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+
+model Error {
+  id           Int       @id @default(autoincrement())
+  date         DateTime  @default(now())
+  latitude     Float
+  longitude    Float
+  serialNumber String
+  deveui       String
+  types        String[]
+  actions      String[]
+  comment      String?
 }
