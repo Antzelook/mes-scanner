@@ -40,11 +40,13 @@ const LatLongForm = () => {
 
   useEffect(() => {
     if (locationRequested && coords) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLat(coords.latitude.toString());
       setLong(coords.longitude.toString());
       toast.success("Η τοποθεσία ενημερώθηκε!");
+      setLocationRequested(false);
     }
-  }, [locationRequested, coords]);
+  }, [coords, locationRequested]);
 
   return (
     <div className="flex gap-4 items-end mt-4">
