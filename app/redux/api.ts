@@ -7,16 +7,17 @@ export const api = createApi({
     getData: builder.query<{ id: number; value: string }[], void>({
       query: () => "data",
     }),
-    addData: builder.mutation<{ id: number; value: string }, { value: string }>(
-      {
-        query: (body) => ({
-          url: "data",
-          method: "POST",
-          body,
-        }),
-      }
-    ),
+    addError: builder.mutation<
+      { id: number; value: string },
+      { value: string }
+    >({
+      query: (body) => ({
+        url: "errorForm",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetDataQuery, useAddDataMutation } = api;
+export const { useGetDataQuery, useAddErrorMutation } = api;
