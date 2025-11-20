@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 const Header = () => {
   return (
     <>
-      <header className="w-full p-4 border-b shadow-lg">
+      <header className="w-full p-4 border-b shadow-lg bg-green-50">
         <div className="flex flex-col md:flex-row md:justify-start items-center gap-4">
           <Image
             src="/images/mes-logo.png"
@@ -14,7 +14,7 @@ const Header = () => {
             height={100}
           />
           <Link href="/">
-            <h1 className="text-3xl font-bold text-blue-400">Mes-Digital</h1>
+            <h1 className="text-3xl font-bold text-sky-500">Mes-Digital</h1>
           </Link>
           <div className="flex items-center w-full md:w-1/3 border shadow-lg rounded-xl md:ml-auto">
             <input
@@ -22,7 +22,7 @@ const Header = () => {
               placeholder="Search..."
               className="flex-1 p-2 focus:outline-none"
             />
-            <button className="p-2 bg-white rounded-xl hover:bg-blue-400">
+            <button className="p-2 bg-white rounded-xl hover:bg-teal-200">
               <FaSearch className="h-5 w-5 text-black" />
             </button>
           </div>
