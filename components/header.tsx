@@ -7,12 +7,15 @@ const Header = () => {
     <>
       <header className="w-full p-4 border-b shadow-lg bg-green-50">
         <div className="flex flex-col md:flex-row md:justify-start items-center gap-4">
-          <Image
-            src="/images/mes-logo.png"
-            alt="Mes digital logo"
-            width={100}
-            height={100}
-          />
+          <Link href="/">
+            <Image
+              src="/images/mes-logo.png"
+              alt="Mes digital logo"
+              width={100}
+              height={100}
+            />
+          </Link>
+
           <Link href="/">
             <h1 className="text-2xl font-bold">Mesogeos Digital</h1>
           </Link>
