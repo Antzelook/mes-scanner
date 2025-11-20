@@ -3,7 +3,7 @@ import { HiArrowRight } from "react-icons/hi";
 
 const Button = () => {
   return (
-    <Link href="/insertError">
+    <Link href="/errorForm">
       <button
         className="flex justify-start font-bold bg-blue-950 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition
       w-full md:w-full lg:w-2/3"
