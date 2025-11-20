@@ -57,7 +57,7 @@ const LatLongForm = () => {
           <input
             type="text"
             value={lat}
-            onChange={(e) => setLat(e.target.value)}
+            readOnly
             placeholder="Πατήστε το κουμπί τοποθεσίας →"
             className="border rounded-xl p-2 w-full"
           />
@@ -68,7 +68,7 @@ const LatLongForm = () => {
           <input
             type="text"
             value={long}
-            onChange={(e) => setLong(e.target.value)}
+            readOnly
             placeholder="Πατήστε το κουμπί τοποθεσίας →"
             className="border rounded-xl p-2 w-full"
           />
