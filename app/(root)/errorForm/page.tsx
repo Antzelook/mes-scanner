@@ -50,7 +50,7 @@ const InsertError = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* DATE */}
         <div>
-          <label>Ημερομηνία:</label>
+          <label className="font-semibold">Ημερομηνία:</label>
           <input value={currentDate} 
           readOnly
           className="border rounded-xl p-2 w-full" />
@@ -81,12 +81,11 @@ const InsertError = () => {
 
         {/* OTHER COMMENT */}
         <div>
-          <label>Άλλο σχόλιο:</label>
-          <input
-            type="text"
+          <label className="font-semibold">Άλλο σχόλιο:</label>
+          <textarea
             value={otherComment}
             onChange={(e) => setOtherComment(e.target.value)}
-            className="border rounded-xl p-2 w-full"
+            className="border rounded-xl p-2 w-full h-25"
           />
         </div>
 
