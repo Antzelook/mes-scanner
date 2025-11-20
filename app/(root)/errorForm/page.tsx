@@ -51,9 +51,11 @@ const InsertError = () => {
         {/* DATE */}
         <div>
           <label className="font-semibold">Ημερομηνία:</label>
-          <input value={currentDate} 
-          readOnly
-          className="border rounded-xl p-2 w-full" />
+          <input
+            value={currentDate}
+            readOnly
+            className="border rounded-xl p-2 w-full"
+          />
         </div>
 
         {/* LAT / LONG */}
