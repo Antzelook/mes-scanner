@@ -53,7 +53,7 @@ const LatLongForm = () => {
       {/* LEFT SIDE — LAT ABOVE LONG */}
       <div className="flex flex-col flex-1 gap-3">
         <div>
-          <label>Latitude:</label>
+          <label className="font-semibold">Latitude:</label>
           <input
             type="text"
             value={lat}
@@ -64,7 +64,7 @@ const LatLongForm = () => {
         </div>
 
         <div>
-          <label>Longitude:</label>
+          <label className="font-semibold">Longitude:</label>
           <input
             type="text"
             value={long}

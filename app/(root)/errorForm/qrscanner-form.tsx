@@ -12,7 +12,7 @@ const QRScannerForm = () => {
       {/* Left side – inputs */}
       <div className="flex-1 space-y-4">
         <div>
-          <label>Serial Number:</label>
+          <label className="font-semibold">Serial Number:</label>
           <input
             type="text"
             placeholder="Πατήστε για σάρωση →"
@@ -23,7 +23,7 @@ const QRScannerForm = () => {
         </div>
 
         <div>
-          <label>Deveui:</label>
+          <label className="font-semibold">Deveui:</label>
           <input
             type="text"
             placeholder="Πατήστε για σάρωση →"
