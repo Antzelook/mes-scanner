@@ -7,15 +7,14 @@ import Spinner from "@/components/spinner";
 import QRScanner from "@/components/qrscanner";
 import { FiMapPin } from "react-icons/fi";
 
-
 const ErrorForm = () => {
-  const [lat, setLat] = useState("");
-  const [long, setLong] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [locationRequested, setLocationRequested] = useState(false);
-  const [serial, setSerial] = useState("");
+  const [serialNumber, setSerialNumber] = useState("");
   const [deveui, setDeveui] = useState("");
   const [types, setTypes] = useState<string[]>([]);
-  const [otherComment, setOtherComment] = useState("");
+  const [comment, setComment] = useState("");
   const [actions, setActions] = useState<string[]>([]);
 
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -43,8 +42,8 @@ const ErrorForm = () => {
   useEffect(() => {
     if (locationRequested && coords) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setLat(coords.latitude.toString());
-      setLong(coords.longitude.toString());
+      setLatitude(coords.latitude.toString());
+      setLongitude(coords.longitude.toString());
       toast.success("Η τοποθεσία ενημερώθηκε!");
       setLocationRequested(false);
     }
@@ -79,13 +78,13 @@ const ErrorForm = () => {
 
     const newRecord = {
       date: currentDate,
-      latitude: lat,
-      longitude: long,
-      serial,
+      latitude,
+      longitude,
+      serialNumber,
       deveui,
       types,
       actions,
-      otherComment,
+      comment,
     };
 
     console.log("Submitting:", newRecord);
@@ -114,7 +113,7 @@ const ErrorForm = () => {
               <label className="font-semibold">Latitude:</label>
               <input
                 type="text"
-                value={lat}
+                value={latitude}
                 readOnly
                 placeholder="Πατήστε το κουμπί τοποθεσίας →"
                 className="border rounded-xl p-2 w-full"
@@ -125,7 +124,7 @@ const ErrorForm = () => {
               <label className="font-semibold">Longitude:</label>
               <input
                 type="text"
-                value={long}
+                value={longitude}
                 readOnly
                 placeholder="Πατήστε το κουμπί τοποθεσίας →"
                 className="border rounded-xl p-2 w-full"
@@ -151,8 +150,8 @@ const ErrorForm = () => {
               <input
                 type="text"
                 placeholder="Πατήστε για σάρωση →"
-                value={serial}
-                onChange={(e) => setSerial(e.target.value)}
+                value={serialNumber}
+                onChange={(e) => setSerialNumber(e.target.value)}
                 className="border rounded-xl p-1 w-full"
               />
             </div>
@@ -172,7 +171,7 @@ const ErrorForm = () => {
           <div className="w-30 h-30">
             <QRScanner
               onScan={(serial: string, deveui: string) => {
-                setSerial(serial);
+                setSerialNumber(serial);
                 setDeveui(deveui);
               }}
             />
@@ -200,8 +199,8 @@ const ErrorForm = () => {
         <div>
           <label className="font-semibold">Άλλο σχόλιο:</label>
           <textarea
-            value={otherComment}
-            onChange={(e) => setOtherComment(e.target.value)}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
             className="border rounded-xl p-2 w-full h-25"
           />
         </div>

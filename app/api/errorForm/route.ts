@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     const saved = await prisma.errorRecord.create({
       data: {
-        date: date ? new Date(date) : undefined,
+        date,
         latitude,
         longitude,
         serialNumber,
