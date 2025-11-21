@@ -7,6 +7,7 @@ import Spinner from "@/components/spinner";
 import QRScanner from "@/components/qrscanner";
 import { FiMapPin } from "react-icons/fi";
 
+
 const ErrorForm = () => {
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");

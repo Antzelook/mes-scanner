@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const errorSchema = z.object({
+export const recordedErrorSchema = z.object({
   latitude: z.number().min(1, "Το πεδίο είναι υποχρεωτικό"),
   longitude: z.number().min(1, "Το πεδίο είναι υποχρεωτικό"),
   serialNumber: z

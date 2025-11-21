@@ -15,7 +15,7 @@ datasource db {
 }
 
 
-model Error {
+model RecordedError {
   id           Int       @id @default(autoincrement())
   date         DateTime  @default(now())
   latitude     Float
