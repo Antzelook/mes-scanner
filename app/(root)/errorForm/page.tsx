@@ -11,8 +11,8 @@ import { useErrorRecordMutation } from "@/app/redux/api";
 const ErrorForm = () => {
   const [errorRecord, { isLoading }] = useErrorRecordMutation();
 
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
   const [locationRequested, setLocationRequested] = useState(false);
   const [serialNumber, setSerialNumber] = useState("");
   const [deveui, setDeveui] = useState("");
@@ -48,8 +48,8 @@ const ErrorForm = () => {
   useEffect(() => {
     if (locationRequested && coords) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      setLatitude(coords.latitude.toString());
-      setLongitude(coords.longitude.toString());
+      setLatitude(coords.latitude);
+      setLongitude(coords.longitude);
       toast.success("Η τοποθεσία ενημερώθηκε!");
       setLocationRequested(false);
     }
@@ -110,8 +110,8 @@ const ErrorForm = () => {
       // Reset form
       setSerialNumber("");
       setDeveui("");
-      setLatitude("");
-      setLongitude("");
+      setLatitude(null);
+      setLongitude(null);
       setTypes([]);
       setActions([]);
       setComment("");
@@ -143,7 +143,7 @@ const ErrorForm = () => {
               <label className="font-semibold">Latitude:</label>
               <input
                 type="text"
-                value={latitude}
+                value={latitude || ""}
                 readOnly
                 placeholder="Πατήστε το κουμπί τοποθεσίας →"
                 className="border rounded-xl p-2 w-full"
@@ -154,7 +154,7 @@ const ErrorForm = () => {
               <label className="font-semibold">Longitude:</label>
               <input
                 type="text"
-                value={longitude}
+                value={longitude || ""}
                 readOnly
                 placeholder="Πατήστε το κουμπί τοποθεσίας →"
                 className="border rounded-xl p-2 w-full"

@@ -1,19 +1,34 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { recordErrorSchema } from "@/lib/validators";
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const body = await request.json();
+    const parsed = recordErrorSchema.parse(body);
 
     const saved = await prisma.errorRecord.create({
-      data,
+      data: {
+        date: new Date(),
+        latitude: parsed.latitude,
+        longitude: parsed.longitude,
+        serialNumber: parsed.serialNumber,
+        deveui: parsed.deveui,
+        types: parsed.types ?? [],
+        actions: parsed.actions ?? [],
+        comment: parsed.comment ?? null,
+      },
     });
 
     return NextResponse.json({ success: true, data: saved }, { status: 201 });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("POST /api/errorForm error:", error);
+
     return NextResponse.json(
-      { success: false, error: "Failed to save data" },
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to save data",
+      },
       { status: 500 }
     );
   }
