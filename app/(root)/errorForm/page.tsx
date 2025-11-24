@@ -9,7 +9,7 @@ import { FiMapPin } from "react-icons/fi";
 import { useErrorRecordMutation } from "@/app/redux/api";
 
 const ErrorForm = () => {
-  const [addError, { isLoading }] = useErrorRecordMutation();
+  const [errorRecord, { isLoading }] = useErrorRecordMutation();
 
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
@@ -47,7 +47,7 @@ const ErrorForm = () => {
 
   useEffect(() => {
     if (locationRequested && coords) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setLatitude(coords.latitude.toString());
       setLongitude(coords.longitude.toString());
       toast.success("Η τοποθεσία ενημερώθηκε!");
@@ -93,9 +93,9 @@ const ErrorForm = () => {
     });
 
     const payload = {
-      date: new Date(),
-      latitude: parseFloat(latitude),
-      longitude: parseFloat(longitude),
+      date: currentDate,
+      latitude,
+      longitude,
       serialNumber,
       deveui,
       types,
@@ -104,7 +104,7 @@ const ErrorForm = () => {
     };
 
     try {
-      await addError(payload).unwrap();
+      await errorRecord(payload).unwrap();
       toast.success("Η βλάβη καταχωρήθηκε!");
 
       // Reset form

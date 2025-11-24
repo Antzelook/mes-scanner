@@ -2,33 +2,11 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
-  console.log("API HIT");
   try {
-
-    const recordError = await request.json();
-
-   const {
-      date,
-      latitude,
-      longitude,
-      serialNumber,
-      deveui,
-      types,
-      actions,
-      comment,
-    } = recordError;
+    const data = await request.json();
 
     const saved = await prisma.errorRecord.create({
-      data: {
-         date: new Date(date),
-        latitude,
-        longitude,
-        serialNumber,
-        deveui,
-        types,
-        actions,
-        comment,
-      },
+      data,
     });
 
     return NextResponse.json({ success: true, data: saved }, { status: 201 });
