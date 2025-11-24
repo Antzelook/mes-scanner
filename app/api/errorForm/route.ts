@@ -2,10 +2,12 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
+  console.log("API HIT");
   try {
+
     const recordError = await request.json();
 
-    const {
+   const {
       date,
       latitude,
       longitude,
@@ -18,7 +20,7 @@ export async function POST(request: Request) {
 
     const saved = await prisma.errorRecord.create({
       data: {
-        date,
+         date: new Date(date),
         latitude,
         longitude,
         serialNumber,

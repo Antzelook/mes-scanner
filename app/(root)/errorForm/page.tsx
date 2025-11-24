@@ -6,8 +6,11 @@ import toast from "react-hot-toast";
 import Spinner from "@/components/spinner";
 import QRScanner from "@/components/qrscanner";
 import { FiMapPin } from "react-icons/fi";
+import { useErrorRecordMutation } from "@/app/redux/api";
 
 const ErrorForm = () => {
+  const [addError, { isLoading }] = useErrorRecordMutation();
+
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [locationRequested, setLocationRequested] = useState(false);
@@ -26,7 +29,10 @@ const ErrorForm = () => {
     });
 
   const handleLocationClick = () => {
-    if (!coords) toast.error("Η τοποθεσία δεν είναι ακόμα έτοιμη...");
+    if (!coords) {
+      toast.error("Η τοποθεσία δεν είναι ακόμα έτοιμη...");
+      return;
+    }
     setLocationRequested(true);
   };
 
@@ -41,7 +47,7 @@ const ErrorForm = () => {
 
   useEffect(() => {
     if (locationRequested && coords) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       setLatitude(coords.latitude.toString());
       setLongitude(coords.longitude.toString());
       toast.success("Η τοποθεσία ενημερώθηκε!");
@@ -73,11 +79,10 @@ const ErrorForm = () => {
 
   const currentDate = new Date().toLocaleDateString("el-GR");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newRecord = {
-      date: currentDate,
+    console.log("Submitting:", {
       latitude,
       longitude,
       serialNumber,
@@ -85,10 +90,35 @@ const ErrorForm = () => {
       types,
       actions,
       comment,
+    });
+
+    const payload = {
+      date: new Date(),
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+      serialNumber,
+      deveui,
+      types,
+      actions,
+      comment,
     };
 
-    console.log("Submitting:", newRecord);
-    toast.success("Η βλάβη καταχωρήθηκε!");
+    try {
+      await addError(payload).unwrap();
+      toast.success("Η βλάβη καταχωρήθηκε!");
+
+      // Reset form
+      setSerialNumber("");
+      setDeveui("");
+      setLatitude("");
+      setLongitude("");
+      setTypes([]);
+      setActions([]);
+      setComment("");
+    } catch (error) {
+      toast.error("Σφάλμα κατά την καταχώρηση");
+      console.error(error);
+    }
   };
 
   return (
@@ -225,6 +255,7 @@ const ErrorForm = () => {
         {/* SUBMIT */}
         <button
           type="submit"
+          disabled={isLoading}
           className="bg-blue-950 hover:bg-blue-600 text-white px-6 py-2 rounded-xl w-full"
         >
           Καταχώρηση
