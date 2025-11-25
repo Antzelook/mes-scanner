@@ -1,41 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import toast from "react-hot-toast";
 import Spinner from "@/components/spinner";
 import QRScanner from "@/components/qrscanner";
 import { FiMapPin } from "react-icons/fi";
 import { useErrorRecordMutation } from "@/app/redux/api";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ErrorFormType } from "@/types";
+import { errorFormSchema } from "@/lib/validators";
+import { defaultFormValues } from "@/lib/constants";
 
 const ErrorForm = () => {
   const [errorRecord, { isLoading }] = useErrorRecordMutation();
 
-  const [latitude, setLatitude] = useState<number | null>(null);
-  const [longitude, setLongitude] = useState<number | null>(null);
-  const [locationRequested, setLocationRequested] = useState(false);
-  const [serialNumber, setSerialNumber] = useState("");
-  const [deveui, setDeveui] = useState("");
-  const [types, setTypes] = useState<string[]>([]);
-  const [comment, setComment] = useState("");
-  const [actions, setActions] = useState<string[]>([]);
-
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
-      positionOptions: {
-        enableHighAccuracy: false,
-      },
+      positionOptions: { enableHighAccuracy: false },
       userDecisionTimeout: 5000,
     });
 
-  const handleLocationClick = () => {
-    if (!coords) {
-      toast.error("Η τοποθεσία δεν είναι ακόμα έτοιμη...");
-      return;
-    }
-    setLocationRequested(true);
-  };
+  const form = useForm<ErrorFormType>({
+    resolver: zodResolver(errorFormSchema),
+    defaultValues: defaultFormValues,
+  });
 
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = form;
+
+  // Handle geolocation errors
   useEffect(() => {
     if (isGeolocationAvailable === false) {
       toast.error("Το browser δεν υποστηρίζει τοποθεσία.");
@@ -45,15 +44,15 @@ const ErrorForm = () => {
     }
   }, [isGeolocationAvailable, isGeolocationEnabled]);
 
-  useEffect(() => {
-    if (locationRequested && coords) {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      setLatitude(coords.latitude);
-      setLongitude(coords.longitude);
-      toast.success("Η τοποθεσία ενημερώθηκε!");
-      setLocationRequested(false);
+  const handleLocationClick = () => {
+    if (!coords) {
+      toast.error("Η τοποθεσία δεν είναι ακόμα έτοιμη...");
+      return;
     }
-  }, [coords, locationRequested]);
+    setValue("latitude", coords.latitude);
+    setValue("longitude", coords.longitude);
+    toast.success("Η τοποθεσία ενημερώθηκε!");
+  };
 
   const typeOptions = ["Βλάβη 1", "Βλάβη 2", "Βλάβη 3", "Βλάβη 4"];
   const actionOptions = [
@@ -63,146 +62,99 @@ const ErrorForm = () => {
     "Ενέργεια 4",
   ];
 
-  const toggleType = (type: string) => {
-    setTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
-    );
-  };
-
-  const toggleAction = (action: string) => {
-    setActions((prev) =>
-      prev.includes(action)
-        ? prev.filter((a) => a !== action)
-        : [...prev, action]
-    );
-  };
-
-  const currentDate = new Date().toLocaleDateString("el-GR");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    console.log("Submitting:", {
-      latitude,
-      longitude,
-      serialNumber,
-      deveui,
-      types,
-      actions,
-      comment,
-    });
-
-    const payload = {
-      date: currentDate,
-      latitude,
-      longitude,
-      serialNumber,
-      deveui,
-      types,
-      actions,
-      comment,
-    };
-
+  const onSubmit = async (data: ErrorFormType) => {
     try {
-      await errorRecord(payload).unwrap();
+      await errorRecord(data).unwrap();
       toast.success("Η βλάβη καταχωρήθηκε!");
-
-      // Reset form
-      setSerialNumber("");
-      setDeveui("");
-      setLatitude(null);
-      setLongitude(null);
-      setTypes([]);
-      setActions([]);
-      setComment("");
+      form.reset(defaultFormValues);
     } catch (error) {
       toast.error("Σφάλμα κατά την καταχώρηση");
       console.error(error);
     }
   };
 
+  const currentDate = new Date().toLocaleDateString("el-GR");
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-center">Καταχώρηση Βλάβης</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+
         {/* DATE */}
         <div>
           <label className="font-semibold">Ημερομηνία:</label>
-          <input
-            value={currentDate}
-            readOnly
-            className="border rounded-xl p-2 w-full"
-          />
+          <input value={currentDate} readOnly className="border rounded-xl p-2 w-full" />
         </div>
 
-        {/* LAT / LONG */}
+        {/* LAT - LONG */}
         <div className="flex gap-4 items-end mt-4">
           <div className="flex flex-col flex-1 gap-3">
             <div>
               <label className="font-semibold">Latitude:</label>
               <input
                 type="text"
-                value={latitude || ""}
-                readOnly
-                placeholder="Πατήστε το κουμπί τοποθεσίας →"
+                {...register("latitude", { valueAsNumber: true })}
                 className="border rounded-xl p-2 w-full"
               />
+              {errors.latitude && <p className="text-red-600">{errors.latitude.message}</p>}
             </div>
 
             <div>
               <label className="font-semibold">Longitude:</label>
               <input
                 type="text"
-                value={longitude || ""}
-                readOnly
-                placeholder="Πατήστε το κουμπί τοποθεσίας →"
+                {...register("longitude", { valueAsNumber: true })}
                 className="border rounded-xl p-2 w-full"
               />
+              {errors.longitude && <p className="text-red-600">{errors.longitude.message}</p>}
             </div>
           </div>
 
-          {/* LOCATION BUTTON */}
           <button
-            onClick={handleLocationClick}
             type="button"
+            onClick={handleLocationClick}
             className="w-30 h-30 flex items-center justify-center"
           >
             {!coords ? <Spinner /> : <FiMapPin size={40} />}
           </button>
         </div>
 
-        {/* QR SCANNER */}
+        {/* QR SCANNER + FIELDS */}
         <div className="flex gap-6 items-start">
           <div className="flex-1 space-y-4">
             <div>
               <label className="font-semibold">Serial Number:</label>
               <input
                 type="text"
-                placeholder="Πατήστε για σάρωση →"
-                value={serialNumber}
-                onChange={(e) => setSerialNumber(e.target.value)}
+                {...register("serialNumber")}
                 className="border rounded-xl p-1 w-full"
               />
+              {errors.serialNumber && (
+                <p className="text-red-600">{errors.serialNumber.message}</p>
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Deveui:</label>
               <input
                 type="text"
-                placeholder="Πατήστε για σάρωση →"
-                value={deveui}
-                onChange={(e) => setDeveui(e.target.value)}
+                {...register("deveui")}
                 className="border rounded-xl p-1 w-full"
               />
+              
+              {errors.deveui && (
+                <p className="text-red-600">{errors.deveui.message}</p>
+              )}
+                
             </div>
           </div>
 
           <div className="w-30 h-30">
             <QRScanner
-              onScan={(serial: string, deveui: string) => {
-                setSerialNumber(serial);
-                setDeveui(deveui);
+              onScan={(sn: string, de: string) => {
+                setValue("serialNumber", sn);
+                setValue("deveui", de);
               }}
             />
           </div>
@@ -212,25 +164,21 @@ const ErrorForm = () => {
         <div>
           <label className="font-semibold">Είδος Βλάβης:</label>
           <div className="flex flex-col mt-1">
-            {typeOptions.map((type) => (
-              <label key={type} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={types.includes(type)}
-                  onChange={() => toggleType(type)}
-                />
-                {type}
+            {typeOptions.map((t) => (
+              <label key={t} className="flex items-center gap-2">
+                <input type="checkbox" value={t} {...register("types")} />
+                {t}
               </label>
             ))}
           </div>
+          {errors.types && <p className="text-red-600">{errors.types.message}</p>}
         </div>
 
         {/* COMMENT */}
         <div>
           <label className="font-semibold">Άλλο σχόλιο:</label>
           <textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            {...register("comment")}
             className="border rounded-xl p-2 w-full h-25"
           />
         </div>
@@ -239,17 +187,14 @@ const ErrorForm = () => {
         <div>
           <label className="font-semibold">Ενέργειες:</label>
           <div className="flex flex-col mt-1">
-            {actionOptions.map((action) => (
-              <label key={action} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={actions.includes(action)}
-                  onChange={() => toggleAction(action)}
-                />
-                {action}
+            {actionOptions.map((a) => (
+              <label key={a} className="flex items-center gap-2">
+                <input type="checkbox" value={a} {...register("actions")} />
+                {a}
               </label>
             ))}
           </div>
+          {errors.actions && <p className="text-red-600">{errors.actions.message}</p>}
         </div>
 
         {/* SUBMIT */}
