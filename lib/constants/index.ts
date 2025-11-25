@@ -4,3 +4,14 @@ export const APP_DESCRIPTION =
   "Digital solutions for your buisness needs ";
 export const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
+
+export const defaultFormValues = {
+  date: "",
+  latitude: 0,
+  longitude: 0,
+  serialNumber: "",
+  deveui: "",
+  types: [],
+  actions: [],
+  comment: "",
+};
