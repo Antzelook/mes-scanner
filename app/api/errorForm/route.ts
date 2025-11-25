@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { recordErrorSchema } from "@/lib/validators";
+import { errorFormSchema } from "@/lib/validators";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const parsed = recordErrorSchema.parse(body);
+    const parsed = errorFormSchema.parse(body);
 
     const saved = await prisma.errorRecord.create({
       data: {

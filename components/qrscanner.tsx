@@ -5,7 +5,7 @@ import { Scanner, IDetectedBarcode } from "@yudiel/react-qr-scanner";
 import { AiOutlineQrcode } from "react-icons/ai";
 
 interface QRScannerProps {
-  onScan: (serial: string, deveui: string) => void;
+  onScan: (serialNumber: string, deveui: string) => void;
 }
 
 const QRScanner = ({ onScan }: QRScannerProps) => {
@@ -17,8 +17,8 @@ const QRScanner = ({ onScan }: QRScannerProps) => {
     const text = codes[0].rawValue;
     if (!text) return;
 
-    const [serial, deveui] = text.split("_");
-    onScan(serial ?? "", deveui ?? "");
+    const [serialNumber, deveui] = text.split("_");
+    onScan(serialNumber ?? "", deveui ?? "");
     setOpen(false);
   };
 

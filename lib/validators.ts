@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-export const recordErrorSchema = z.object({
+export const errorFormSchema = z.object({
   date: z.string(),
-  latitude: z.coerce.number(),
-  longitude: z.coerce.number(),
-  serialNumber: z.string().min(1, "Απαιτείται serial number"),
-  deveui: z.string().min(1, "Απαιτείται deveui"),
+  latitude: z.number().min(1, "Το πεδίο είναι υποχρεωτικό"),
+  longitude: z.number().min(1, "Το πεδίο είναι υποχρεωτικό"),
+  serialNumber: z.string().min(1,  "Το πεδίο είναι υποχρεωτικό"),
+  deveui: z.string().min(1,  "Το πεδίο είναι υποχρεωτικό"),
   types: z.array(z.string()).optional(),
   actions: z.array(z.string()).optional(),
   comment: z.string().optional(),
