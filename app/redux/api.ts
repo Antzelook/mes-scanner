@@ -7,7 +7,7 @@ export const api = createApi({
     getErrorRecords: builder.query({
       query: () => "errorForm",
     }),
-    createErrorRecord: builder.mutation({
+    ErrorRecord: builder.mutation({
       query: (body) => ({
         url: "errorForm",
         method: "POST",
@@ -17,4 +17,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetErrorRecordsQuery, useCreateErrorRecordMutation } = api;
+export const { useGetErrorRecordsQuery, useErrorRecordMutation } = api;
