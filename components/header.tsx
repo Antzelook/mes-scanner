@@ -27,7 +27,7 @@ const Header = () => {
               placeholder="Search..."
               className="flex-1 p-2 focus:outline-none"
             />
-            <button className="p-2 bg-white dark:bg-white rounded-xl hover:bg-teal-200">
+            <button className="p-2 bg-white rounded-xl hover:bg-teal-200">
               <FaSearch className="h-5 w-5 text-black dark:text-white" />
             </button>
           </div>
