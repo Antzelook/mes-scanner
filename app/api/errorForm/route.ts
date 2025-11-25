@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/db/prisma";
 import { errorFormSchema } from "@/lib/validators";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
         deveui: parsed.deveui,
         types: parsed.types ?? [],
         actions: parsed.actions ?? [],
-        comment: parsed.comment ?? null,
+        comment: parsed.comment || "",
       },
     });
 
