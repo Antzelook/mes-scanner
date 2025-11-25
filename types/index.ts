@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { recordErrorSchema } from "@/lib/validators";
+import { errorFormSchema } from "@/lib/validators";
 
 export type ErrorForm = {
-  id: number;
-  date: Date;
+  id: string,
+  date: string;
   latitude: number;
   longitude: number;
   serialNumber: string;
@@ -13,4 +13,4 @@ export type ErrorForm = {
   comment?: string | null;
 };
 
-export type ErrorFormType = z.infer<typeof recordErrorSchema>;
+export type ErrorFormType = z.infer<typeof errorFormSchema>
