@@ -17,7 +17,9 @@ const Header = () => {
           </Link>
 
           <Link href="/">
-            <h1 className="text-2xl font-bold text-black">Mesogeos Digital</h1>
+            <h1 className="text-2xl font-bold text-black dark:text-white">
+              Mesogeos Digital
+            </h1>
           </Link>
           <div className="flex items-center w-full md:w-1/3 border shadow-lg rounded-xl md:ml-auto">
             <input
@@ -25,8 +27,8 @@ const Header = () => {
               placeholder="Search..."
               className="flex-1 p-2 focus:outline-none"
             />
-            <button className="p-2 bg-white rounded-xl hover:bg-teal-200">
-              <FaSearch className="h-5 w-5 text-black" />
+            <button className="p-2 bg-white dark:bg-white rounded-xl hover:bg-teal-200">
+              <FaSearch className="h-5 w-5 text-black dark:text-white" />
             </button>
           </div>
         </div>
