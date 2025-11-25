@@ -4,10 +4,10 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "/api/" }),
   endpoints: (builder) => ({
-    getData: builder.query<{ id: number; value: string }[], void>({
-      query: () => "data",
+    getErrorRecords: builder.query({
+      query: () => "errorForm",
     }),
-    errorRecord: builder.mutation({
+    createErrorRecord: builder.mutation({
       query: (body) => ({
         url: "errorForm",
         method: "POST",
@@ -17,4 +17,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetDataQuery, useErrorRecordMutation } = api;
+export const { useGetErrorRecordsQuery, useCreateErrorRecordMutation } = api;
