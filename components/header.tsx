@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = () => {
+  const { data: session } = useSession();
+
   return (
     <>
       <header className="w-full p-4 shadow-xl">
@@ -30,6 +33,16 @@ const Header = () => {
             <button className="p-2 bg-white rounded-xl hover:bg-teal-200">
               <FaSearch className="h-5 w-5 text-blackS" />
             </button>
+          </div>
+          <div>
+            {session && (
+              <button
+                onClick={() => signOut()}
+                className="bg-red-500 p-2 rounded-[30px]"
+              >
+                Sign Out
+              </button>
+            )}
           </div>
         </div>
       </header>
