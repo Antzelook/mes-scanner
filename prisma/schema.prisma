@@ -27,7 +27,7 @@ model ErrorRecord {
 }
 
 model Admin {
-  id           Int       @id @default(autoincrement())
+  id           String    @id @default(uuid())
   email        String    @unique
   password     String  
   role         String    @default("admin")
