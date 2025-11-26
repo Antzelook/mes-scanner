@@ -31,10 +31,10 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-150 ">
       <form
         onSubmit={handleSubmit}
-        className="p-6 bg-white shadow rounded w-80 space-y-4"
+        className="p-6 bg-white rounded shadow-lg  w-100 space-y-4"
       >
         <h1 className="text-2xl font-semibold text-center">Admin Login</h1>
 
