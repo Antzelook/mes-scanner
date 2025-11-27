@@ -15,3 +15,8 @@ export const defaultFormValues = {
   actions: [],
   comment: "",
 };
+
+export const defaultSignInValues = {
+  email: "",
+  password: "",
+};
