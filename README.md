@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+📘 QR Device Error Reporter
 
-First, run the development server:
+A modern web application for scanning device QR codes, capturing live geolocation, and submitting device error reports with ease.
 
-```bash
+This project is built with Next.js, React, Tailwind CSS, Redux Toolkit, Prisma, NextAuth, and several powerful utilities including react-qr-scanner and react-geolocated.
+
+🚀 Features
+🔍 QR Code Scanning
+
+Scan device QR codes using your device camera
+Extract serial number / device info instantly
+Built on top of react-qr-scanner
+
+📍 Automatic Geolocation
+Get the user’s current latitude & longitude with one click
+Uses react-geolocated for permission handling and accuracy feedback
+
+📝 Error Reporting
+Submit detailed error records for devices
+Form validation powered by Zod
+Stores data securely in the database using Prisma ORM
+
+🔐 Admin Authentication
+Admin-only dashboard
+Login via NextAuth Credentials Provider
+Protected routes and session-based access
+
+⚛️ Modern React UI
+Built using the Next.js App Router
+Styled with Tailwind CSS
+State managed through Redux Toolkit + RTK Query
+Fully responsive frontend
+
+🧰 Tech Stack
+Frontend
+React 18 / Next.js 14
+Tailwind CSS
+Redux Toolkit
+RTK Query
+react-qr-scanner
+react-geolocated
+
+Backend
+Next.js API Routes
+Prisma ORM (PostgreSQL / MySQL / SQLite)
+NextAuth.js (Credentials Strategy)
+Validation
+Zod schema validation
+
+📁 Features Overview
+👨‍💼 Admin Login
+
+Admins authenticate via email & password.
+NextAuth handles sessions with JWT strategy.
+
+🖨 Scan & Report Workflow
+Click Scan QR
+Automatically read:
+Device EUI
+Serial Number
+Click Get Location to fetch:
+Latitude
+Longitude
+Fill in:
+Error type(s)
+Actions taken
+Optional comment
+Submit report → stored in database via Prisma
+
+📊 View Stored Error Records
+
+Admins can access and manage all stored device error logs.
+
+📦 Installation
+1. Clone the repo
+git clone https://github.com/your-username/Antzelok/mes-digital
+cd repo-name
+
+2. Install dependencies
+npm install
+
+3. Create .env file
+DATABASE_URL=your_prisma_database_url
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_random_secret
+
+4. Push Prisma schema
+npx prisma migrate dev
+
+5. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
