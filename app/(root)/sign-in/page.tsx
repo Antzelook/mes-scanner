@@ -18,6 +18,7 @@ const SignInPage = () => {
       email,
       password,
       redirect: false,
+      callbackUrl: "/",
     });
 
     setLoading(false);
