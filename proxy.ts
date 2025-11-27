@@ -25,10 +25,10 @@ export async function proxy(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  // No token → redirect to login
+  // No token → redirect to sign in
   if (!token) {
-    const loginUrl = new URL("/sign-in", req.url);
-    return NextResponse.redirect(loginUrl);
+    const signInUrl = new URL("/sign-in", req.url);
+    return NextResponse.redirect(signInUrl);
   }
 
   // User is authenticated → allow request
