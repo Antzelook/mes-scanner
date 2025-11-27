@@ -7,7 +7,7 @@ export async function proxy(req: NextRequest) {
 
   // Public routes – ALWAYS accessible
   const publicPaths = [
-    "/login",
+    "/sign-in",
     "/api/auth",
     "/favicon.ico",
     "/_next",
@@ -27,7 +27,7 @@ export async function proxy(req: NextRequest) {
 
   // No token → redirect to login
   if (!token) {
-    const loginUrl = new URL("/login", req.url);
+    const loginUrl = new URL("/sign-in", req.url);
     return NextResponse.redirect(loginUrl);
   }
 
