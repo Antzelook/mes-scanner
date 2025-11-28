@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
-import { Metadata } from "next";
 import toast from "react-hot-toast";
 import Spinner from "@/components/spinner";
 import QRScanner from "@/components/qrscanner";
@@ -13,10 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorFormType } from "@/types";
 import { errorFormSchema } from "@/lib/validators";
 import { defaultFormValues } from "@/lib/constants";
-
-export const metadata: Metadata = {
-  title: "Error Form Page",
-};
 
 const ErrorForm = () => {
   const [errorRecord, { isLoading }] = useErrorRecordMutation();
