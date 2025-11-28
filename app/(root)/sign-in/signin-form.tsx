@@ -25,7 +25,7 @@ const SignInForm = () => {
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirect: false, // handle redirect manually
+      redirect: true,
       callbackUrl: "/",
     });
 
