@@ -11,7 +11,7 @@ export async function proxy(req: NextRequest) {
     "/api/auth",
     "/favicon.ico",
     "/_next",
-    "/static"
+    "/static",
   ];
 
   // Skip if path starts with public routes

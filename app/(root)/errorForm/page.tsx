@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
+import { Metadata } from "next";
 import toast from "react-hot-toast";
 import Spinner from "@/components/spinner";
 import QRScanner from "@/components/qrscanner";
@@ -13,6 +14,10 @@ import { ErrorFormType } from "@/types";
 import { errorFormSchema } from "@/lib/validators";
 import { defaultFormValues } from "@/lib/constants";
 
+export const metadata: Metadata = {
+  title: "Error Form Page",
+};
+
 const ErrorForm = () => {
   const [errorRecord, { isLoading }] = useErrorRecordMutation();
 
@@ -22,17 +27,16 @@ const ErrorForm = () => {
       userDecisionTimeout: 5000,
     });
 
-  const form = useForm<ErrorFormType>({
-    resolver: zodResolver(errorFormSchema),
-    defaultValues: defaultFormValues,
-  });
-
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
-  } = form;
+  } = useForm<ErrorFormType>({
+    resolver: zodResolver(errorFormSchema),
+    defaultValues: defaultFormValues,
+  });
 
   // Handle geolocation errors
   useEffect(() => {
@@ -66,7 +70,7 @@ const ErrorForm = () => {
     try {
       await errorRecord(data).unwrap();
       toast.success("Η βλάβη καταχωρήθηκε!");
-      form.reset(defaultFormValues);
+      reset(defaultFormValues);
     } catch (error) {
       toast.error("Σφάλμα κατά την καταχώρηση");
       console.error(error);
@@ -80,11 +84,14 @@ const ErrorForm = () => {
       <h1 className="text-2xl font-bold mb-6 text-center">Καταχώρηση Βλάβης</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
         {/* DATE */}
         <div>
           <label className="font-semibold">Ημερομηνία:</label>
-          <input value={currentDate} readOnly className="border rounded-xl p-2 w-full" />
+          <input
+            value={currentDate}
+            readOnly
+            className="border rounded-xl p-2 w-full"
+          />
         </div>
 
         {/* LAT - LONG */}
@@ -97,7 +104,9 @@ const ErrorForm = () => {
                 {...register("latitude", { valueAsNumber: true })}
                 className="border rounded-xl p-2 w-full"
               />
-              {errors.latitude && <p className="text-red-600">{errors.latitude.message}</p>}
+              {errors.latitude && (
+                <p className="text-red-600">{errors.latitude.message}</p>
+              )}
             </div>
 
             <div>
@@ -107,7 +116,9 @@ const ErrorForm = () => {
                 {...register("longitude", { valueAsNumber: true })}
                 className="border rounded-xl p-2 w-full"
               />
-              {errors.longitude && <p className="text-red-600">{errors.longitude.message}</p>}
+              {errors.longitude && (
+                <p className="text-red-600">{errors.longitude.message}</p>
+              )}
             </div>
           </div>
 
@@ -142,11 +153,10 @@ const ErrorForm = () => {
                 {...register("deveui")}
                 className="border rounded-xl p-1 w-full"
               />
-              
+
               {errors.deveui && (
                 <p className="text-red-600">{errors.deveui.message}</p>
               )}
-                
             </div>
           </div>
 
@@ -171,7 +181,9 @@ const ErrorForm = () => {
               </label>
             ))}
           </div>
-          {errors.types && <p className="text-red-600">{errors.types.message}</p>}
+          {errors.types && (
+            <p className="text-red-600">{errors.types.message}</p>
+          )}
         </div>
 
         {/* COMMENT */}
@@ -194,7 +206,9 @@ const ErrorForm = () => {
               </label>
             ))}
           </div>
-          {errors.actions && <p className="text-red-600">{errors.actions.message}</p>}
+          {errors.actions && (
+            <p className="text-red-600">{errors.actions.message}</p>
+          )}
         </div>
 
         {/* SUBMIT */}

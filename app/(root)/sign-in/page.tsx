@@ -15,6 +15,7 @@ const SignInPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<AdminSignInFormType>({
     resolver: zodResolver(adminSgnInSchema),
@@ -33,6 +34,8 @@ const SignInPage = () => {
       alert("Invalid email or password");
       return;
     }
+
+    reset(defaultAdminSignInValues);
 
     router.push("/");
   };
