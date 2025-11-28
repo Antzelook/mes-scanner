@@ -10,6 +10,7 @@ export async function proxy(req: NextRequest) {
     "/sign-in",
     "/api/auth",
     "/favicon.ico",
+    "/images/mes-logo.png",
     "/_next",
     "/static",
   ];
