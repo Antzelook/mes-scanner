@@ -7,7 +7,7 @@ const handler = NextAuth({
 
   providers: [
     Credentials({
-      name: "Admin Login",
+      name: "Admin Sign-In",
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
@@ -36,7 +36,6 @@ const handler = NextAuth({
         return {
           id: admin.id,
           email: admin.email,
-
           role: admin.role ?? "admin",
         };
       },
