@@ -1,27 +1,33 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { AdminSignInFormType } from "@/types";
+import { adminSgnInSchema } from "@/lib/validators";
+import { defaultAdminSignInValues } from "@/lib/constants";
 
 const SignInPage = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<AdminSignInFormType>({
+    resolver: zodResolver(adminSgnInSchema),
+    defaultValues: defaultAdminSignInValues,
+  });
 
+  const onSubmit = async (data: AdminSignInFormType) => {
     const res = await signIn("credentials", {
-      email,
-      password,
+      email: data.email,
+      password: data.password,
       redirect: true,
       callbackUrl: "/",
     });
-
-    setLoading(false);
 
     if (res?.error) {
       alert("Invalid email or password");
@@ -29,40 +35,42 @@ const SignInPage = () => {
     }
 
     router.push("/");
-  }
+  };
 
   return (
-    <div className="flex items-center justify-center h-150 ">
+    <div className="flex items-center justify-center h-150">
       <form
-        onSubmit={handleSubmit}
-        className="p-6 bg-white rounded shadow-lg  w-100 space-y-4"
+        onSubmit={handleSubmit(onSubmit)}
+        className="p-6 bg-white rounded shadow-lg w-100 space-y-4"
       >
         <h1 className="text-2xl font-semibold text-center">Admin Login</h1>
 
         <input
           type="email"
-          required
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          {...register("email")}
           className="w-full p-2 border rounded"
         />
+        {errors.email && (
+          <p className="text-red-600 text-sm">{errors.email.message}</p>
+        )}
 
         <input
           type="password"
-          required
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          {...register("password")}
           className="w-full p-2 border rounded"
         />
+        {errors.password && (
+          <p className="text-red-600 text-sm">{errors.password.message}</p>
+        )}
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={isSubmitting}
           className="w-full p-2 bg-blue-600 text-white rounded"
         >
-          {loading ? "Logging in..." : "Login"}
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
