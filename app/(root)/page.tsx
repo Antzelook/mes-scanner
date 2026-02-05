@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 const HomePage = () => {
   return (
     <div className="flex flex-col m-5 space-y-5">
-      <Button />
-      <button>Ιστορικό Βλαβωών</button>
+      <Button label="Καταχώρηση Βλάβης" link="/errorForm" />
+      <Button label="Ιστορικό Βλαβών" link="/history" />
     </div>
   );
 };
