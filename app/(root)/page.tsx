@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col m-5 space-y-5">
       <Button label="Καταχώρηση Βλάβης" link="/errorForm" />
-      <Button label="Ιστορικό Βλαβών" link="/history" />
+      <Button label="Ιστορικό Βλαβών" link="/ErrorsHistory" />
     </div>
   );
 };
