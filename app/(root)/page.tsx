@@ -9,8 +9,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col m-5 space-y-5">
       <Button />
-      <Button />
-      <Button />
+      <button>Ιστορικό Βλαβωών</button>
     </div>
   );
 };
