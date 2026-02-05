@@ -6,6 +6,7 @@ export async function GET() {
   try {
     const errors = await prisma.errorRecord.findMany({
       orderBy: { date: "desc" },
+      take: 10,
     });
     return NextResponse.json({ success: true, data: errors });
   } catch (error) {
