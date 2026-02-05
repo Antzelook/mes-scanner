@@ -1,11 +1,14 @@
 import { Metadata } from "next";
+import ErrorsHistory from "./errors-history-table";
 
 export const metadata: Metadata = {
-  title: "Home Page",
+  title: "History Page",
 };
 
 const ErrorsHistoryPage = () => {
-  return <>ErrorsHistoryPage</>;
+  return <>
+  <ErrorsHistory />
+  </>;
 };
 
 export default ErrorsHistoryPage;
