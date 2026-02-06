@@ -10,7 +10,7 @@ export async function GET() {
     });
     return NextResponse.json({ success: true, data: errors });
   } catch (error) {
-    console.error("GET /api/errorsHistory error:", error);
+    console.error("GET /api/history error:", error);
     return NextResponse.json({ success: false, error: "Failed to fetch data" });
   }
 }

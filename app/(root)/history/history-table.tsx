@@ -4,7 +4,7 @@ import { useGetErrorsHistoryQuery } from "@/app/redux/api";
 import { ErrorForm } from "@/types";
 import Spinner from "@/components/spinner";
 
-const ErrorsHistoryTable = () => {
+const HistoryTable = () => {
   const { data, isLoading, isError } = useGetErrorsHistoryQuery([]);
   const records: ErrorForm[] = data?.data || [];
 
@@ -212,4 +212,4 @@ const ErrorsHistoryTable = () => {
   );
 };
 
-export default ErrorsHistoryTable;
+export default HistoryTable;
