@@ -12,7 +12,9 @@ const ErrorsHistoryTable = () => {
     return (
       <div className="flex flex-col justify-center items-center p-20">
         <Spinner />
-        <span className="ml-2 mt-4 text-gray-500 animate-pulse">Loading records...</span>
+        <span className="ml-2 mt-4 text-gray-500 animate-pulse">
+          Loading records...
+        </span>
       </div>
     );
   }
@@ -21,7 +23,9 @@ const ErrorsHistoryTable = () => {
     return (
       <div className="m-4 bg-red-50 text-red-700 p-10 rounded-lg flex flex-col items-center border border-red-200">
         <span className="font-bold">Oops! Something went wrong.</span>
-        <span className="text-sm">Failed to load history. Please try again later.</span>
+        <span className="text-sm">
+          Failed to load history. Please try again later.
+        </span>
       </div>
     );
   }
@@ -31,22 +35,32 @@ const ErrorsHistoryTable = () => {
       {/* MOBILE VIEW: Cards (Visible on small screens, hidden on md+) */}
       <div className="md:hidden flex flex-col space-y-4">
         {records.length === 0 ? (
-          <p className="text-center text-gray-400 py-10">No error records found.</p>
+          <p className="text-center text-gray-400 py-10">
+            No error records found.
+          </p>
         ) : (
           records.map((record) => (
-            <div key={record.id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-              <div className="flex justify-between items-start border-b pb-2 mb-3">
+            <div
+              key={record.id}
+              className="bg-white border-gray-200 rounded-xl p-4 shadow-sm"
+            >
+              <div className="flex justify-between items-start py-2 border-t">
                 <div>
-                  <div className="text-xs font-bold uppercase text-gray-400">Date</div>
+                  <div className="text-xs font-bold text-gray-400">DATE</div>
                   <div className="text-sm font-medium">
-                    {new Date(record.date).toLocaleDateString()} 
+                    {new Date(record.date).toLocaleDateString()}
                     <span className="ml-2 text-gray-400 font-normal">
-                      {new Date(record.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {new Date(record.date).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs font-bold uppercase text-gray-400">Location</div>
+                  <div className="text-xs font-bold text-gray-400">
+                    LOCATION
+                  </div>
                   <div className="text-xs font-mono text-blue-600">
                     {record.latitude.toFixed(4)}, {record.longitude.toFixed(4)}
                   </div>
@@ -54,26 +68,40 @@ const ErrorsHistoryTable = () => {
               </div>
 
               <div className="mb-3">
-                <div className="text-gray-900 font-bold">{record.serialNumber}</div>
-                <div className="text-xs text-gray-500 font-mono">{record.deveui}</div>
+                <div className="text-gray-900 font-bold">
+                  {record.serialNumber}
+                </div>
+                <div className="text-xs text-gray-500 font-mono">
+                  {record.deveui}
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase">Issues</span>
+                  <span className="text-[10px] font-bold text-gray-400 ">
+                    ISSUES
+                  </span>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {record.types.map((type, i) => (
-                      <span key={i} className="bg-red-100 text-red-700 text-[9px] px-2 py-0.5 rounded font-bold border border-red-200">
+                      <span
+                        key={i}
+                        className="bg-red-100 text-red-700 text-[9px] px-2 py-0.5 rounded-xl font-bold border border-red-200"
+                      >
                         {type}
                       </span>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase">Actions</span>
+                  <span className="text-[10px] font-bold text-gray-400">
+                    ACTIONS
+                  </span>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {record.actions.map((action, i) => (
-                      <span key={i} className="bg-green-100 text-green-700 text-[9px] px-2 py-0.5 rounded font-bold border border-green-200">
+                      <span
+                        key={i}
+                        className="bg-green-100 text-green-700 text-[9px] px-2 py-0.5 rounded-xl font-bold border border-green-200"
+                      >
                         {action}
                       </span>
                     ))}
@@ -82,9 +110,13 @@ const ErrorsHistoryTable = () => {
               </div>
 
               {record.comment && (
-                <div className="mt-3 pt-3 border-t">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase italic">Comment</span>
-                  <p className="text-sm text-gray-600 italic leading-tight">{record.comment}</p>
+                <div className="mt-3 pt-3">
+                  <span className="text-[10px] font-bold text-gray-400 italic">
+                    COMMENT
+                  </span>
+                  <p className="text-sm text-gray-600 italic leading-tight">
+                    {record.comment}
+                  </p>
                 </div>
               )}
             </div>
@@ -108,20 +140,34 @@ const ErrorsHistoryTable = () => {
           <tbody>
             {records.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-6 py-10 text-center text-gray-400">
+                <td
+                  colSpan={6}
+                  className="px-6 py-10 text-center text-gray-400"
+                >
                   No error records found.
                 </td>
               </tr>
             ) : (
               records.map((record) => (
-                <tr key={record.id} className="bg-white border-b hover:bg-gray-50 transition-colors">
+                <tr
+                  key={record.id}
+                  className="bg-white border-b hover:bg-gray-50 transition-colors"
+                >
                   <td className="px-4 py-3 whitespace-nowrap">
-                    <div className="font-medium text-gray-700">{new Date(record.date).toLocaleDateString()}</div>
-                    <div className="text-xs text-gray-400">{new Date(record.date).toLocaleTimeString()}</div>
+                    <div className="font-medium text-gray-700">
+                      {new Date(record.date).toLocaleDateString()}
+                    </div>
+                    <div className="text-xs text-gray-400">
+                      {new Date(record.date).toLocaleTimeString()}
+                    </div>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="font-bold text-gray-900">{record.serialNumber}</div>
-                    <div className="text-xs text-gray-400 font-mono">{record.deveui}</div>
+                    <div className="font-bold text-gray-900">
+                      {record.serialNumber}
+                    </div>
+                    <div className="text-xs text-gray-400 font-mono">
+                      {record.deveui}
+                    </div>
                   </td>
                   <td className="px-4 py-3 font-mono text-blue-600 text-xs">
                     {record.latitude.toFixed(4)}, {record.longitude.toFixed(4)}
@@ -129,7 +175,10 @@ const ErrorsHistoryTable = () => {
                   <td className="px-4 py-3">
                     <div className="flex flex-wrap gap-1">
                       {record.types.map((type, i) => (
-                        <span key={i} className="bg-red-100 text-red-800 text-[10px] px-2 py-0.5 rounded uppercase font-bold border border-red-200">
+                        <span
+                          key={i}
+                          className="bg-red-100 text-red-800 text-[10px] px-2 py-0.5 rounded uppercase font-bold border border-red-200"
+                        >
                           {type}
                         </span>
                       ))}
@@ -138,13 +187,19 @@ const ErrorsHistoryTable = () => {
                   <td className="px-4 py-3">
                     <div className="flex flex-wrap gap-1">
                       {record.actions.map((action, i) => (
-                        <span key={i} className="bg-green-100 text-green-800 text-[10px] px-2 py-0.5 rounded uppercase font-bold border border-green-200">
+                        <span
+                          key={i}
+                          className="bg-green-100 text-green-800 text-[10px] px-2 py-0.5 rounded uppercase font-bold border border-green-200"
+                        >
                           {action}
                         </span>
                       ))}
                     </div>
                   </td>
-                  <td className="px-4 py-3 italic text-gray-600 max-w-[200px] truncate" title={record.comment || ""}>
+                  <td
+                    className="px-4 py-3 italic text-gray-600 max-w-[200px] truncate"
+                    title={record.comment || ""}
+                  >
                     {record.comment || "—"}
                   </td>
                 </tr>
