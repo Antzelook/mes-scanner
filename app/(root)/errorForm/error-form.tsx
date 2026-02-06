@@ -9,12 +9,12 @@ import { FiMapPin } from "react-icons/fi";
 import { useErrorRecordMutation } from "@/app/redux/api";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ErrorFormType } from "@/types";
 import { errorFormSchema } from "@/lib/validators";
 import { defaultFormValues } from "@/lib/constants";
+import { ErrorFormType } from "@/types";
 
-const typeOptions = ["Βλάβη 1", "Βλάβη 2", "Βλάβη 3", "Βλάβη 4"];
-const actionOptions = ["Ενέργεια 1", "Ενέργεια 2", "Ενέργεια 3", "Ενέργεια 4"];
+const typeOptions = ["Boot Loop", "Valve", "Low Battery", "Πόρτα", "'Άλλο"];
+const actionOptions = ["Flash Firmware", "Callibrate Valve", "Αλλαγή Μπαταρίας", "Άνοιγμα Πόρτας", "'Άλλο"];
 
 const ErrorForm = () => {
   const [errorRecord, { isLoading }] = useErrorRecordMutation();
