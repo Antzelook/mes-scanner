@@ -34,8 +34,10 @@ const HistoryTable = () => {
 
   return (
     <div className="w-full p-2 md:p-5">
-      <BackButton />
-      <Search />
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <BackButton />
+        <Search />
+      </div>
       {/* MOBILE VIEW: Cards (Visible on small screens, hidden on md+) */}
       <div className="md:hidden flex flex-col space-y-4">
         {records.length === 0 ? (
