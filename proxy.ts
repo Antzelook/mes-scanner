@@ -11,6 +11,7 @@ export async function proxy(req: NextRequest) {
     "/api/auth",
     "/favicon.ico",
     "/images/mes-logo.png",
+    "/images/MESOGEOS_DIGITAL_LOGO.png",
     "/_next",
     "/static",
   ];

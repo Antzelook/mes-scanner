@@ -8,23 +8,17 @@ const Header = () => {
 
   return (
     <>
-      <header className="w-full p-4 shadow-xl">
+      <header className="w-full p-4 shadow-xl transition bg-linear-to-r from-white from-50%导 to-blue-500">
         <div className="flex flex-col md:flex-row md:justify-start items-center gap-4">
           <Link href="/">
             <Image
-              src="/images/mes-logo.png"
+              src="/images/MESOGEOS_DIGITAL_LOGO.png"
               alt="Mes digital logo"
-              width={100}
-              height={100}
+              width={300}
+              height={200}
             />
           </Link>
-
-          <Link href="/">
-            <h1 className="text-2xl font-bold text-black dark:text-white">
-              Mesogeos Digital
-            </h1>
-          </Link>
-          <div className="flex items-center w-full md:w-1/3 border shadow-lg rounded-xl md:ml-auto">
+          <div className="flex items-center w-full md:w-1/3 border shadow-lg rounded-xl md:ml-auto bg-white">
             <input
               type="text"
               placeholder="Search..."
@@ -38,7 +32,7 @@ const Header = () => {
             {session && (
               <button
                 onClick={() => signOut()}
-                className="bg-red-500 p-2 rounded-[30px]"
+                className=" p-2 rounded-[30px] bg-blue-200 font-bold"
               >
                 Sign Out
               </button>
