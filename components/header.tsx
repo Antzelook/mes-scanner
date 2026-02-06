@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import Search from "./search";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -18,7 +17,6 @@ const Header = () => {
               height={200}
             />
           </Link>
-          <Search />
           <div>
             {session && (
               <button

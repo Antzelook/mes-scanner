@@ -3,6 +3,8 @@
 import { useGetErrorsHistoryQuery } from "@/app/redux/api";
 import { ErrorForm } from "@/types";
 import Spinner from "@/components/spinner";
+import BackButton from "@/components/back-buttons";
+import Search from "@/components/search";
 
 const HistoryTable = () => {
   const { data, isLoading, isError } = useGetErrorsHistoryQuery([]);
@@ -32,6 +34,8 @@ const HistoryTable = () => {
 
   return (
     <div className="w-full p-2 md:p-5">
+      <BackButton />
+      <Search />
       {/* MOBILE VIEW: Cards (Visible on small screens, hidden on md+) */}
       <div className="md:hidden flex flex-col space-y-4">
         {records.length === 0 ? (
