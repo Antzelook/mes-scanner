@@ -1,9 +1,5 @@
 "use client";
 
-import React from "react";
-// Adjust path as needed
-// Adjust path as needed
-
 import { useGetErrorsHistoryQuery } from "@/app/redux/api";
 import { ErrorForm } from "@/types";
 import Spinner from "@/components/spinner";
@@ -32,7 +28,7 @@ const ErrorsHistoryTable = () => {
 
   return (
     <div className="shadow-md sm:rounded-lg border border-gray-200 w-full m-5">
-      <table className="w-full text-sm text-left text-gray-500">
+      <table className="text-sm text-left text-gray-500 w-full m-5">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">
           <tr>
             <th className="p-1">Date</th>
@@ -88,11 +84,16 @@ const ErrorsHistoryTable = () => {
                 <td className="">
                   <ul className="list-disc list-inside">
                     {record.actions.map((action, i) => (
-                      <li key={i}>{action}</li>
+                      <span
+                        key={i}
+                        className="bg-green-200 text-green-800 text-[10px] px-2 py-0.5 rounded uppercase font-bold "
+                      >
+                        {action}
+                      </span>
                     ))}
                   </ul>
                 </td>
-                <td className="italic text-gray-600 max-w-xs truncate">
+                <td className="italic text-gray-600 truncate">
                   {record.comment || "—"}
                 </td>
               </tr>
