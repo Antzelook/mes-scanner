@@ -5,7 +5,7 @@ import { ErrorForm } from "@/types";
 import Spinner from "@/components/spinner";
 
 const ErrorsHistoryTable = () => {
-  const { data, isLoading, isError } = useGetErrorsHistoryQuery(undefined);
+  const { data, isLoading, isError } = useGetErrorsHistoryQuery([]);
   const records: ErrorForm[] = data?.data || [];
 
   if (isLoading) {
@@ -42,9 +42,9 @@ const ErrorsHistoryTable = () => {
           records.map((record) => (
             <div
               key={record.id}
-              className="bg-white border-gray-200 rounded-xl p-4 shadow-sm"
+              className="bg-white border-gray-200 rounded-xl p-4 shadow-xl"
             >
-              <div className="flex justify-between items-start py-2 border-t">
+              <div className="flex justify-between items-start py-2 ">
                 <div>
                   <div className="text-xs font-bold text-gray-400">DATE</div>
                   <div className="text-sm font-medium">

@@ -8,7 +8,7 @@ export async function proxy(req: NextRequest) {
   // Public routes – ALWAYS accessible
   const publicPaths = [
     "/sign-in",
-    "/api/auth",
+    "/auth",
     "/favicon.ico",
     "/images/mes-logo.png",
     "/images/MESOGEOS_DIGITAL_LOGO.png",
