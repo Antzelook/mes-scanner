@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaSearch } from "react-icons/fa";
 import { useSession, signOut } from "next-auth/react";
+import Search from "./search";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -18,16 +18,7 @@ const Header = () => {
               height={200}
             />
           </Link>
-          <div className="flex items-center w-full md:w-1/3 border shadow-lg rounded-xl md:ml-auto bg-white">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="flex-1 p-2 focus:outline-none"
-            />
-            <button className="p-2 bg-white rounded-xl hover:bg-teal-200">
-              <FaSearch className="h-5 w-5 text-blackS" />
-            </button>
-          </div>
+          <Search />
           <div>
             {session && (
               <button
