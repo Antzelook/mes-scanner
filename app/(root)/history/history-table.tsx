@@ -39,7 +39,7 @@ const HistoryTable = () => {
         <Search />
       </div>
       {/* MOBILE VIEW: Cards (Visible on small screens, hidden on md+) */}
-      <div className="md:hidden flex flex-col space-y-4">
+      <div className="md:hidden flex flex-col space-y-4 m-1">
         {records.length === 0 ? (
           <p className="text-center text-gray-400 py-10">
             No error records found.

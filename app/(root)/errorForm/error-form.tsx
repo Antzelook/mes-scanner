@@ -14,7 +14,13 @@ import { defaultFormValues } from "@/lib/constants";
 import { ErrorFormType } from "@/types";
 
 const typeOptions = ["Boot Loop", "Valve", "Low Battery", "Πόρτα", "'Άλλο"];
-const actionOptions = ["Flash Firmware", "Callibrate Valve", "Αλλαγή Μπαταρίας", "Άνοιγμα Πόρτας", "'Άλλο"];
+const actionOptions = [
+  "Flash Firmware",
+  "Callibrate Valve",
+  "Αλλαγή Μπαταρίας",
+  "Άνοιγμα Πόρτας",
+  "'Άλλο",
+];
 
 const ErrorForm = () => {
   const [errorRecord, { isLoading }] = useErrorRecordMutation();
@@ -197,7 +203,7 @@ const ErrorForm = () => {
       <button
         type="submit"
         disabled={isLoading}
-        className="bg-blue-950 hover:bg-blue-600 text-white px-6 py-2 rounded-xl w-full"
+        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl w-full"
       >
         Καταχώρηση
       </button>
