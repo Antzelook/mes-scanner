@@ -19,7 +19,7 @@ const actionOptions = [
   "Callibrate Valve",
   "Αλλαγή Μπαταρίας",
   "Άνοιγμα Πόρτας",
-  "'Άλλο",
+  "Άλλο",
 ];
 
 const ErrorForm = () => {
@@ -174,15 +174,6 @@ const ErrorForm = () => {
         {errors.types && <p className="text-red-600">{errors.types.message}</p>}
       </div>
 
-      {/* Comment */}
-      <div>
-        <label className="font-semibold">Άλλο σχόλιο:</label>
-        <textarea
-          {...register("comment")}
-          className="border rounded-xl p-2 w-full h-25"
-        />
-      </div>
-
       {/* Actions */}
       <div>
         <label className="font-semibold">Ενέργειες:</label>
@@ -197,6 +188,15 @@ const ErrorForm = () => {
         {errors.actions && (
           <p className="text-red-600">{errors.actions.message}</p>
         )}
+      </div>
+
+      {/* Comment */}
+      <div>
+        <label className="font-semibold">Άλλο σχόλιο:</label>
+        <textarea
+          {...register("comment")}
+          className="border rounded-xl p-2 w-full h-25"
+        />
       </div>
 
       {/* Submit */}
