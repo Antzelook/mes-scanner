@@ -24,9 +24,10 @@ const HistoryTable = () => {
   if (isError) {
     return (
       <div className="m-4 bg-red-50 text-red-700 p-10 rounded-lg flex flex-col items-center border border-red-200">
-        <span className="font-bold">Oops! Something went wrong.</span>
+        <span className="font-bold">Κάτι πήγε στραβά!</span>
         <span className="text-sm">
-          Failed to load history. Please try again later.
+          Σφάλμα κατά την ανάκτηση των δεδομένων. Παρακαλώ δοκιμάστε ξανά
+          αργότερα.
         </span>
       </div>
     );
@@ -42,7 +43,7 @@ const HistoryTable = () => {
       <div className="md:hidden flex flex-col space-y-4 m-1">
         {records.length === 0 ? (
           <p className="text-center text-gray-400 py-10">
-            No error records found.
+            Δεν βρεθήκαν αποτελέσματα.
           </p>
         ) : (
           records.map((record) => (
@@ -52,7 +53,7 @@ const HistoryTable = () => {
             >
               <div className="flex justify-between items-start py-2 ">
                 <div>
-                  <div className="text-xs font-bold text-gray-400">DATE</div>
+                  <div className="text-xs font-bold text-gray-400">ΗΜ/ΝΙΑ</div>
                   <div className="text-sm font-medium">
                     {new Date(record.date).toLocaleDateString()}
                     <span className="ml-2 text-gray-400 font-normal">
@@ -65,7 +66,7 @@ const HistoryTable = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-xs font-bold text-gray-400">
-                    LOCATION
+                    ΤΟΠΟΘΕΣΙΑ
                   </div>
                   <div className="text-xs font-mono text-blue-600">
                     {record.latitude.toFixed(4)}, {record.longitude.toFixed(4)}
@@ -85,7 +86,7 @@ const HistoryTable = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <span className="text-[10px] font-bold text-gray-400 ">
-                    ISSUES
+                    ΒΛΑΒΗ
                   </span>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {record.types.map((type, i) => (
@@ -100,7 +101,7 @@ const HistoryTable = () => {
                 </div>
                 <div>
                   <span className="text-[10px] font-bold text-gray-400">
-                    ACTIONS
+                    ΕΝΕΡΓΕΙΕΣ
                   </span>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {record.actions.map((action, i) => (
@@ -118,7 +119,7 @@ const HistoryTable = () => {
               {record.comment && (
                 <div className="mt-3 pt-3">
                   <span className="text-[10px] font-bold text-gray-400 italic">
-                    COMMENT
+                    ΣΧΟΛΙΑ
                   </span>
                   <p className="text-sm text-gray-600 italic leading-tight">
                     {record.comment}
@@ -135,12 +136,12 @@ const HistoryTable = () => {
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">
             <tr>
-              <th className="px-4 py-3">Date</th>
-              <th className="px-4 py-3">Device (S/N & DevEUI)</th>
-              <th className="px-4 py-3">Location</th>
-              <th className="px-4 py-3">Issue Types</th>
-              <th className="px-4 py-3">Actions Taken</th>
-              <th className="px-4 py-3">Comment</th>
+              <th className="px-4 py-3">ΗΜ/ΝΙΑ</th>
+              <th className="px-4 py-3">ΣΥΣΚΕΥΗ (S/N & DevEUI)</th>
+              <th className="px-4 py-3">ΤΟΠΟΘΕΣΙΑ</th>
+              <th className="px-4 py-3">ΒΛΑΒΗ</th>
+              <th className="px-4 py-3">ΕΝΕΡΓΕΙΕΣ</th>
+              <th className="px-4 py-3">ΣΧΟΛΙΑ</th>
             </tr>
           </thead>
           <tbody>
@@ -150,7 +151,7 @@ const HistoryTable = () => {
                   colSpan={6}
                   className="px-6 py-10 text-center text-gray-400"
                 >
-                  No error records found.
+                  Δεν βρεθήκαν αποτελέσματα.
                 </td>
               </tr>
             ) : (

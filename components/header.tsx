@@ -24,7 +24,7 @@ const Header = () => {
               onClick={() => signOut()}
               className="p-2 px-6 rounded-xl bg-blue-200 font-bold hover:bg-blue-400"
             >
-              Sign Out
+              Έξοδος
             </button>
           )}
         </div>
