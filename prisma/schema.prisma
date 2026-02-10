@@ -27,7 +27,7 @@ model ErrorRecord {
 }
 
 model Admin {
-  id           String    @id @default(uuid())
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email        String    @unique
   password     String  
   role         String    @default("admin")
