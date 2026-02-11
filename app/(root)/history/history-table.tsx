@@ -3,7 +3,7 @@
 import { useGetErrorsHistoryQuery } from "@/app/redux/api";
 import { ErrorForm } from "@/types";
 import Spinner from "@/components/spinner";
-import BackButton from "@/components/back-buttons";
+import BackButton from "@/components/back-button";
 import Search from "@/components/search";
 
 const HistoryTable = () => {
@@ -39,7 +39,7 @@ const HistoryTable = () => {
         <BackButton />
         <Search />
       </div>
-      {/* MOBILE VIEW: Cards (Visible on small screens, hidden on md+) */}
+      {/* MOBILE VIEW */}
       <div className="md:hidden flex flex-col space-y-4 m-1">
         {records.length === 0 ? (
           <p className="text-center text-gray-400 py-10">
@@ -131,7 +131,7 @@ const HistoryTable = () => {
         )}
       </div>
 
-      {/* DESKTOP VIEW: Table (Hidden on small screens, visible on md+) */}
+      {/* DESKTOP VIEW */}
       <div className="hidden md:block overflow-x-auto shadow-md rounded-lg border border-gray-200">
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">

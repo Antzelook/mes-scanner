@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { errorFormSchema } from "@/lib/validators";
 import { defaultFormValues } from "@/lib/constants";
 import { ErrorFormType } from "@/types";
+import BackButton from "@/components/back-button";
 
 const typeOptions = ["Boot Loop", "Valve", "Low Battery", "Πόρτα", "'Άλλο"];
 const actionOptions = [
@@ -42,7 +43,6 @@ const ErrorForm = () => {
     defaultValues: defaultFormValues,
   });
 
-  // Geolocation errors
   useEffect(() => {
     if (!isGeolocationAvailable)
       toast.error("Το browser δεν υποστηρίζει τοποθεσία.");
@@ -74,140 +74,147 @@ const ErrorForm = () => {
   const currentDate = new Date().toLocaleDateString("el-GR");
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {/* DATE */}
-      <div>
-        <label className="font-semibold">Ημερομηνία:</label>
-        <input
-          value={currentDate}
-          readOnly
-          className="border rounded-xl p-2 w-full"
-        />
-      </div>
+    <div className="p-6 max-w-4xl mx-auto">
+      <BackButton />
+      <h1 className="text-2xl font-bold mb-6 text-center">Καταχώρηση</h1>
 
-      {/* LAT-LONG */}
-      <div className="flex gap-4 items-end mt-4">
-        <div className="flex flex-col flex-1 gap-3">
-          <div>
-            <label className="font-semibold">Latitude:</label>
-            <input
-              type="text"
-              {...register("latitude", { valueAsNumber: true })}
-              className="border rounded-xl p-2 w-full"
-            />
-            {errors.latitude && (
-              <p className="text-red-600">{errors.latitude.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="font-semibold">Longitude:</label>
-            <input
-              type="text"
-              {...register("longitude", { valueAsNumber: true })}
-              className="border rounded-xl p-2 w-full"
-            />
-            {errors.longitude && (
-              <p className="text-red-600">{errors.longitude.message}</p>
-            )}
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={handleLocationClick}
-          className="w-30 h-30 flex items-center justify-center"
-        >
-          {!coords ? <Spinner /> : <FiMapPin size={40} />}
-        </button>
-      </div>
-
-      {/* QR Scanner */}
-      <div className="flex gap-6 items-start">
-        <div className="flex-1 space-y-4">
-          <div>
-            <label className="font-semibold">Serial Number:</label>
-            <input
-              type="text"
-              {...register("serialNumber")}
-              className="border rounded-xl p-1 w-full"
-            />
-            {errors.serialNumber && (
-              <p className="text-red-600">{errors.serialNumber.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="font-semibold">Deveui:</label>
-            <input
-              type="text"
-              {...register("deveui")}
-              className="border rounded-xl p-1 w-full"
-            />
-            {errors.deveui && (
-              <p className="text-red-600">{errors.deveui.message}</p>
-            )}
-          </div>
-        </div>
-
-        <div className="w-30 h-30">
-          <QRScanner
-            onScan={(sn: string, de: string) => {
-              setValue("serialNumber", sn);
-              setValue("deveui", de);
-            }}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {/* DATE */}
+        <div>
+          <label className="font-semibold">Ημερομηνία:</label>
+          <input
+            value={currentDate}
+            readOnly
+            className="border rounded-xl p-2 w-full"
           />
         </div>
-      </div>
 
-      {/* Types */}
-      <div>
-        <label className="font-semibold">Είδος Βλάβης:</label>
-        <div className="flex flex-col mt-1">
-          {typeOptions.map((t) => (
-            <label key={t} className="flex items-center gap-2">
-              <input type="checkbox" value={t} {...register("types")} />
-              {t}
-            </label>
-          ))}
+        {/* LAT-LONG */}
+        <div className="flex gap-4 items-end mt-4">
+          <div className="flex flex-col flex-1 gap-3">
+            <div>
+              <label className="font-semibold">Latitude:</label>
+              <input
+                type="text"
+                {...register("latitude", { valueAsNumber: true })}
+                className="border rounded-xl p-2 w-full"
+              />
+              {errors.latitude && (
+                <p className="text-red-600">{errors.latitude.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="font-semibold">Longitude:</label>
+              <input
+                type="text"
+                {...register("longitude", { valueAsNumber: true })}
+                className="border rounded-xl p-2 w-full"
+              />
+              {errors.longitude && (
+                <p className="text-red-600">{errors.longitude.message}</p>
+              )}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleLocationClick}
+            className="w-30 h-30 flex items-center justify-center"
+          >
+            {!coords ? <Spinner /> : <FiMapPin size={40} />}
+          </button>
         </div>
-        {errors.types && <p className="text-red-600">{errors.types.message}</p>}
-      </div>
 
-      {/* Actions */}
-      <div>
-        <label className="font-semibold">Ενέργειες:</label>
-        <div className="flex flex-col mt-1">
-          {actionOptions.map((a) => (
-            <label key={a} className="flex items-center gap-2">
-              <input type="checkbox" value={a} {...register("actions")} />
-              {a}
-            </label>
-          ))}
+        {/* QR Scanner */}
+        <div className="flex gap-6 items-start">
+          <div className="flex-1 space-y-4">
+            <div>
+              <label className="font-semibold">Serial Number:</label>
+              <input
+                type="text"
+                {...register("serialNumber")}
+                className="border rounded-xl p-1 w-full"
+              />
+              {errors.serialNumber && (
+                <p className="text-red-600">{errors.serialNumber.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="font-semibold">Deveui:</label>
+              <input
+                type="text"
+                {...register("deveui")}
+                className="border rounded-xl p-1 w-full"
+              />
+              {errors.deveui && (
+                <p className="text-red-600">{errors.deveui.message}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="w-30 h-30">
+            <QRScanner
+              onScan={(sn: string, de: string) => {
+                setValue("serialNumber", sn);
+                setValue("deveui", de);
+              }}
+            />
+          </div>
         </div>
-        {errors.actions && (
-          <p className="text-red-600">{errors.actions.message}</p>
-        )}
-      </div>
 
-      {/* Comment */}
-      <div>
-        <label className="font-semibold">Άλλο σχόλιο:</label>
-        <textarea
-          {...register("comment")}
-          className="border rounded-xl p-2 w-full h-25"
-        />
-      </div>
+        {/* Types */}
+        <div>
+          <label className="font-semibold">Είδος Βλάβης:</label>
+          <div className="flex flex-col mt-1">
+            {typeOptions.map((t) => (
+              <label key={t} className="flex items-center gap-2">
+                <input type="checkbox" value={t} {...register("types")} />
+                {t}
+              </label>
+            ))}
+          </div>
+          {errors.types && (
+            <p className="text-red-600">{errors.types.message}</p>
+          )}
+        </div>
 
-      {/* Submit */}
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl w-full"
-      >
-        Καταχώρηση
-      </button>
-    </form>
+        {/* Actions */}
+        <div>
+          <label className="font-semibold">Ενέργειες:</label>
+          <div className="flex flex-col mt-1">
+            {actionOptions.map((a) => (
+              <label key={a} className="flex items-center gap-2">
+                <input type="checkbox" value={a} {...register("actions")} />
+                {a}
+              </label>
+            ))}
+          </div>
+          {errors.actions && (
+            <p className="text-red-600">{errors.actions.message}</p>
+          )}
+        </div>
+
+        {/* Comment */}
+        <div>
+          <label className="font-semibold">Άλλο σχόλιο:</label>
+          <textarea
+            {...register("comment")}
+            className="border rounded-xl p-2 w-full h-25"
+          />
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl w-full"
+        >
+          Καταχώρηση
+        </button>
+      </form>
+    </div>
   );
 };
 
