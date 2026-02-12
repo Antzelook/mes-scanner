@@ -23,12 +23,32 @@ model ErrorRecord {
   deveui       String
   types        String[]
   actions      String[]
-  comment      String
+  comments     String    @default("")
 }
 
-model Admin {
+model User {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email        String    @unique
   password     String  
-  role         String    @default("admin")
+  role         String    @default("user")
+  session      Session[]
+}
+
+model Session {
+  sessionToken String   @id
+  userId       String   @db.Uuid
+  expires      DateTime @db.Timestamp(6)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime @updatedAt
+}
+
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
 }
