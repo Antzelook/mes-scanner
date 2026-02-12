@@ -8,7 +8,7 @@ const handler = NextAuth({
 
   providers: [
     Credentials({
-      name: "Admin Sign-In",
+      name: "Sign-In",
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
@@ -18,16 +18,16 @@ const handler = NextAuth({
           return null;
         }
 
-        const admin = await prisma.user.findUnique({
+        const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
 
-        if (!admin) {
+        if (!user) {
           console.log("❌ Admin not found");
           return null;
         }
 
-        const isValid = compareSync(credentials.password, admin.password);
+        const isValid = compareSync(credentials.password, user.password);
 
         if (!isValid) {
           console.log("❌ Invalid password");
@@ -35,9 +35,9 @@ const handler = NextAuth({
         }
 
         return {
-          id: admin.id,
-          email: admin.email,
-          role: admin.role ?? "user",
+          id: user.id,
+          email: user.email,
+          role: user.role ?? "user",
         };
       },
     }),

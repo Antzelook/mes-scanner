@@ -8,7 +8,20 @@ CREATE TABLE "ErrorRecord" (
     "deveui" TEXT NOT NULL,
     "types" TEXT[],
     "actions" TEXT[],
-    "comment" TEXT,
+    "comments" TEXT NOT NULL DEFAULT '',
 
     CONSTRAINT "ErrorRecord_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'user',
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");

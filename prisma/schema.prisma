@@ -31,24 +31,6 @@ model User {
   email        String    @unique
   password     String  
   role         String    @default("user")
-  session      Session[]
-}
-
-model Session {
-  sessionToken String   @id
-  userId       String   @db.Uuid
-  expires      DateTime @db.Timestamp(6)
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt    DateTime @default(now()) @db.Timestamp(6)
-  updatedAt    DateTime @updatedAt
 }
 
 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
-
-  @@id([identifier, token])
-}
