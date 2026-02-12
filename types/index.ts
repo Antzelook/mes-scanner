@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { adminSgnInSchema, errorFormSchema } from "@/lib/validators";
+import { errorFormSchema, userSignInSchema } from "@/lib/validators";
 
 export type ErrorForm = {
   id: string;
@@ -13,10 +13,10 @@ export type ErrorForm = {
   comment?: string | null;
 };
 
-export type AdminSignInForm = {
+export type UserSignInForm = {
   email: string;
   password: string;
 };
 
 export type ErrorFormType = z.infer<typeof errorFormSchema>;
-export type AdminSignInFormType = z.infer<typeof adminSgnInSchema>;
+export type UserSignInFormType = z.infer<typeof userSignInSchema>;

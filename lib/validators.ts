@@ -11,7 +11,7 @@ export const errorFormSchema = z.object({
   comment: z.string().optional(),
 });
 
-export const adminSgnInSchema = z.object({
+export const userSignInSchema = z.object({
   email: z.email("Λανθασμένο email"),
   password: z.string().min(1, "Το πεδίο είναι υποχρεωτικό"),
 });

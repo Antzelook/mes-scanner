@@ -7,7 +7,7 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       role: string;
-    } & DefaultSession["admin"];
+    } & DefaultSession["user"];
   }
 
   interface User extends NextAuthUser {

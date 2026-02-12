@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { compareSync } from "bcrypt-ts-edge";
 import { prisma } from "@/lib/prisma";
 
 const handler = NextAuth({
@@ -17,7 +18,7 @@ const handler = NextAuth({
           return null;
         }
 
-        const admin = await prisma.admin.findUnique({
+        const admin = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
 
@@ -26,7 +27,7 @@ const handler = NextAuth({
           return null;
         }
 
-        const isValid = await (credentials.password, admin.password);
+        const isValid = compareSync(credentials.password, admin.password);
 
         if (!isValid) {
           console.log("❌ Invalid password");
@@ -36,7 +37,7 @@ const handler = NextAuth({
         return {
           id: admin.id,
           email: admin.email,
-          role: admin.role ?? "admin",
+          role: admin.role ?? "user",
         };
       },
     }),
