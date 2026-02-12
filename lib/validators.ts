@@ -8,7 +8,7 @@ export const errorFormSchema = z.object({
   deveui: z.string().min(1, "Το πεδίο είναι υποχρεωτικό"),
   types: z.array(z.string()).optional(),
   actions: z.array(z.string()).optional(),
-  comment: z.string().optional(),
+  comments: z.string().optional(),
 });
 
 export const userSignInSchema = z.object({

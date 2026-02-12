@@ -200,7 +200,7 @@ const ErrorForm = () => {
         <div>
           <label className="font-semibold">Άλλο σχόλιο:</label>
           <textarea
-            {...register("comment")}
+            {...register("comments")}
             className="border rounded-xl p-2 w-full h-25"
           />
         </div>

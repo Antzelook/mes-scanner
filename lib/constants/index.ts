@@ -13,7 +13,7 @@ export const defaultFormValues = {
   deveui: "",
   types: [],
   actions: [],
-  comment: "",
+  comments: "",
 };
 
 export const defaultUserSignInValues = {

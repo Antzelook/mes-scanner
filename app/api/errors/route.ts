@@ -16,7 +16,7 @@ export async function POST(request: Request) {
         deveui: parsed.deveui,
         types: parsed.types ?? [],
         actions: parsed.actions ?? [],
-        comment: parsed.comment || "",
+        comments: parsed.comments || "",
       },
     });
 
