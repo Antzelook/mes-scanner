@@ -16,7 +16,7 @@ export const defaultFormValues = {
   comment: "",
 };
 
-export const defaultAdminSignInValues = {
+export const defaultUserSignInValues = {
   email: "",
   password: "",
 };

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { errorFormSchema } from "@/lib/validators";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/db/prisma";
 
 export async function POST(request: Request) {
   try {

@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AdminSignInFormType } from "@/types";
-import { adminSgnInSchema } from "@/lib/validators";
-import { defaultAdminSignInValues } from "@/lib/constants";
+import { UserSignInFormType } from "@/types";
+import { userSignInSchema } from "@/lib/validators";
+import { defaultUserSignInValues } from "@/lib/constants";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -16,12 +16,12 @@ const SignInForm = () => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<AdminSignInFormType>({
-    resolver: zodResolver(adminSgnInSchema),
-    defaultValues: defaultAdminSignInValues,
+  } = useForm<UserSignInFormType>({
+    resolver: zodResolver(userSignInSchema),
+    defaultValues: defaultUserSignInValues,
   });
 
-  const onSubmit = async (data: AdminSignInFormType) => {
+  const onSubmit = async (data: UserSignInFormType) => {
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
@@ -34,7 +34,7 @@ const SignInForm = () => {
       return;
     }
 
-    reset(defaultAdminSignInValues);
+    reset(defaultUserSignInValues);
     router.push("/");
   };
 

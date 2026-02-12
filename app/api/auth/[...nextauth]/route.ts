@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/db/prisma";
 
 const handler = NextAuth({
   session: { strategy: "jwt" },
