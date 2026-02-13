@@ -15,7 +15,7 @@ const HistoryTable = () => {
       <div className="flex flex-col justify-center items-center p-20">
         <Spinner />
         <span className="ml-2 mt-4 text-gray-500 animate-pulse">
-          Loading records...
+          Φόρτωση δεδομένων...
         </span>
       </div>
     );
@@ -26,8 +26,7 @@ const HistoryTable = () => {
       <div className="m-4 bg-red-50 text-red-700 p-10 rounded-lg flex flex-col items-center border border-red-200">
         <span className="font-bold">Κάτι πήγε στραβά!</span>
         <span className="text-sm">
-          Σφάλμα κατά την ανάκτηση των δεδομένων. Παρακαλώ δοκιμάστε ξανά
-          αργότερα.
+          Σφάλμα κατά την ανάκτηση δεδομένων. Παρακαλώ δοκιμάστε ξανά.
         </span>
       </div>
     );
