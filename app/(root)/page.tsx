@@ -1,5 +1,5 @@
-import Button from "@/components/button";
 import { Metadata } from "next";
+import Button from "@/components/errorForm/button";
 
 export const metadata: Metadata = {
   title: "Home Page",

@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import toast from "react-hot-toast";
-import Spinner from "@/components/spinner";
-import QRScanner from "@/components/qrscanner";
+import Spinner from "@/components/shared/spinner";
+import QRScanner from "@/components/errorForm/qrscanner";
 import { FiMapPin } from "react-icons/fi";
 import { useErrorRecordMutation } from "@/app/redux/api";
 import { useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { errorFormSchema } from "@/lib/validators";
 import { defaultFormValues } from "@/lib/constants";
 import { ErrorFormType } from "@/types";
-import BackButton from "@/components/back-button";
+import BackButton from "@/components/shared/back-button";
 
 const typeOptions = ["Boot Loop", "Valve", "Low Battery", "Πόρτα", "'Άλλο"];
 const actionOptions = [

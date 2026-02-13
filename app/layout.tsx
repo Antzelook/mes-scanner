@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: `%s | Mesogeos Digital`,
+    template: `%s | Mes - Scanner`,
     default: APP_NAME,
   },
   description: APP_DESCRIPTION,

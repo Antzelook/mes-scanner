@@ -2,9 +2,9 @@
 
 import { useGetErrorsHistoryQuery } from "@/app/redux/api";
 import { ErrorForm } from "@/types";
-import Spinner from "@/components/spinner";
-import BackButton from "@/components/back-button";
-import Search from "@/components/search";
+import Spinner from "@/components/shared/spinner";
+import BackButton from "@/components/shared/back-button";
+import Search from "@/components/history/search";
 
 const HistoryTable = () => {
   const { data, isLoading, isError } = useGetErrorsHistoryQuery([]);
