@@ -51,17 +51,15 @@ const HistoryTable = () => {
               className="bg-white border-gray-200 rounded-xl p-4 shadow-xl"
             >
               <div className="flex justify-between items-start py-2 ">
-                <div>
-                  <div className="text-xs font-bold text-gray-400">ΗΜ/ΝΙΑ</div>
-                  <div className="text-sm font-medium">
-                    {new Date(record.date).toLocaleDateString()}
-                    <span className="ml-2 text-gray-400 font-normal">
-                      {new Date(record.date).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
-                  </div>
+                <div className="text-xs font-bold text-gray-400">ΗΜ/ΝΙΑ</div>
+                <div className="text-sm font-medium">
+                  {new Date(record.date).toLocaleDateString()}
+                  <span className="ml-2 text-gray-400 font-normal">
+                    {new Date(record.date).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
                 </div>
                 <div className="text-right">
                   <div className="text-xs font-bold text-gray-400">
@@ -83,21 +81,20 @@ const HistoryTable = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <span className="text-[10px] font-bold text-gray-400 ">
-                    ΒΛΑΒΗ
-                  </span>
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {record.types.map((type, i) => (
-                      <span
-                        key={i}
-                        className="bg-red-100 text-red-700 text-[9px] px-2 py-0.5 rounded-xl font-bold border border-red-200"
-                      >
-                        {type}
-                      </span>
-                    ))}
-                  </div>
+                <span className="text-[10px] font-bold text-gray-400 ">
+                  ΒΛΑΒΗ
+                </span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {record.types.map((type, i) => (
+                    <span
+                      key={i}
+                      className="bg-red-100 text-red-700 text-[9px] px-2 py-0.5 rounded-xl font-bold border border-red-200"
+                    >
+                      {type}
+                    </span>
+                  ))}
                 </div>
+
                 <div>
                   <span className="text-[10px] font-bold text-gray-400">
                     ΕΝΕΡΓΕΙΕΣ
