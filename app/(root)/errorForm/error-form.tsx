@@ -14,8 +14,14 @@ import { defaultFormValues } from "@/lib/constants";
 import { ErrorFormType } from "@/types";
 import BackButton from "@/components/shared/back-button";
 
-const typeOptions = ["Boot Loop", "Valve", "Low Battery", "Πόρτα", "'Άλλο"];
-const actionOptions = [
+const typeOptions: string[] = [
+  "Boot Loop",
+  "Motor Error",
+  "Low Battery",
+  "Πόρτα",
+  "'Άλλο",
+];
+const actionOptions: string[] = [
   "Flash Firmware",
   "Callibrate Valve",
   "Αλλαγή Μπαταρίας",
@@ -71,7 +77,7 @@ const ErrorForm = () => {
     }
   };
 
-  const currentDate = new Date().toLocaleDateString("el-GR");
+  const currentDate: string = new Date().toLocaleDateString("el-GR");
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
