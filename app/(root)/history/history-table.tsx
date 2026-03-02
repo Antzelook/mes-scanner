@@ -5,9 +5,11 @@ import { ErrorForm } from "@/types";
 import Spinner from "@/components/shared/spinner";
 import BackButton from "@/components/shared/back-button";
 import Search from "@/components/history/search";
+import { useState } from "react";
 
 const HistoryTable = () => {
-  const { data, isLoading, isError } = useGetErrorsHistoryQuery([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { data, isLoading, isError } = useGetErrorsHistoryQuery(searchTerm);
   const records: ErrorForm[] = data?.data || [];
 
   if (isLoading) {
@@ -36,7 +38,7 @@ const HistoryTable = () => {
     <div className="w-full p-2 md:p-5">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <BackButton />
-        <Search />
+        <Search onSearch={setSearchTerm} />
       </div>
       {/* MOBILE VIEW */}
       <div className="md:hidden flex flex-col space-y-4 m-1">
